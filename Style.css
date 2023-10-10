@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.outer {
+    margin-top: 5vh;
+    height: 80vh;
+    width: 45vw;
+    background-color: lightyellow;
+    border: 6px solid yellow;
+    border-radius: 20px;
+    padding: 1.2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.base {
+    height: 100%;
+    width: 75%;
+
+}
+
+.display-zone {
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#input {
+    height: 26%;
+    width: 100%;
+    font-size: 1.5rem;
+    background-color: bisque;
+    color: orange;
+    font-weight: bolder;
+}
+
+.operation-zone {
+    height: 70%;
+}
+
+.btn {
+    width: 13%;
+    margin: 2% 6%;
+    font-size: 1.2rem;
+    background-color: bisque;
+    border-radius: 1.2rem;
+}
+
+.btn:hover {
+    background-color: chocolate;
+}
