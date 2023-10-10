@@ -8,7 +8,7 @@ initButton(20);
 function calc(value) {
     //定义运算符数组
     let operators = [];
-    //使用正则表达式匹配基本运算符号，即加减乘除幂
+    //使用正则表达式匹配基本运算符号，即加减乘除幂，并将计算数存入数组
     let nums = value.split(/[\+\-\*\/\^]/);
     for (let i = 0; i < value.length; i++) {
         if ((value[i] == '+' || value[i] == '-' || value[i] == '*' || value[i] == '/' || value[i] == '^')) {
@@ -26,6 +26,7 @@ function calc(value) {
             }
         }
     }
+    //根据数组和运算符号进行运算，先乘除幂，后加减
     for (let i = 0; i < operators.length; i++) {
         if (numSwitch(nums[i]) != "error" && numSwitch(nums[i + 1]) != "error") {
             if (operators[i] == '*') {
