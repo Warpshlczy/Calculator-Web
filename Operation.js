@@ -79,73 +79,76 @@ function calc(value) {
     }
     else return "error";
 }
-// let newVal = "";
-// for (let i = 0; i < value.length; i++) {
-//     let newStr = "";
-//     if (value[i] == '*' || '/') {
-//         let leftNum, rightNum, leftIndex = 0;
-//         let rightIndex = value.length - 1;
-//         for (let former = i; former >= 0; former--) {
-//             if (value[i] == '+' || '-') {
-//                 leftIndex = former + 1;
-//                 leftNum = parseInt(value.substring(leftIndex, i));
-//                 break;
-//             }
-//         }
+/*
+let newVal = "";
+for (let i = 0; i < value.length; i++) {
+    let newStr = "";
+    if (value[i] == '*' || '/') {
+        let leftNum, rightNum, leftIndex = 0;
+        let rightIndex = value.length - 1;
+        for (let former = i; former >= 0; former--) {
+            if (value[i] == '+' || '-') {
+                leftIndex = former + 1;
+                leftNum = parseInt(value.substring(leftIndex, i));
+                break;
+            }
+        }
 
-//         for (let later = i; later < value.length; later++) {
-//             if (value[i] == '+' || '-' || '*' || '/') {
-//                 rightIndex = later;
-//                 rightNum = parseInt(value.substring(i + 1, rightIndex));
-//                 break;
-//             }
-//         }
+        for (let later = i; later < value.length; later++) {
+            if (value[i] == '+' || '-' || '*' || '/') {
+                rightIndex = later;
+                rightNum = parseInt(value.substring(i + 1, rightIndex));
+                break;
+            }
+        }
 
-//         if (value[i] == '*') {
-//             newStr = "" + (leftNum * rightNum);
-//         }
+        if (value[i] == '*') {
+            newStr = "" + (leftNum * rightNum);
+        }
 
-//         else { newStr = "" + (leftNum / rightNum); }
-//         newVal = value.replace(value.substring(leftIndex, rightIndex), newStr);
-//         break;
-//     }
-//     if (i == value.length - 1) {
-//         for (let k = 0; k < value.length; k++) {
-//             let flag = value.length - 1;
-//             if (value[k] == '+' || '-') {
-//                 for (let h = k; h < value.length; h++) {
-//                     if (value[h] == '+' || '-') {
-//                         flag = h;
-//                         break;
-//                     }
+        else { newStr = "" + (leftNum / rightNum); }
+        newVal = value.replace(value.substring(leftIndex, rightIndex), newStr);
+        break;
+    }
+    if (i == value.length - 1) {
+        for (let k = 0; k < value.length; k++) {
+            let flag = value.length - 1;
+            if (value[k] == '+' || '-') {
+                for (let h = k; h < value.length; h++) {
+                    if (value[h] == '+' || '-') {
+                        flag = h;
+                        break;
+                    }
 
-//                 }
-//                 if (value[k] == '+') { newStr = "" + parseInt(value.substring(0, k)) + parseInt(value.substring(k + 1, flag)) }
-//                 else { newStr = "" + parseInt(value.substring(0, k)) - parseInt(value.substring(k + 1, flag)) }
-//                 newVal = value.replace(value.substring(0, flag), newStr);
-//                 break;
-//             }
-//             if (k == value.length - 1) {
-//                 return value;
-//             }
-//         }
-//     }
-// }
-// return calc(newVal);
+                }
+                if (value[k] == '+') { newStr = "" + parseInt(value.substring(0, k)) + parseInt(value.substring(k + 1, flag)) }
+                else { newStr = "" + parseInt(value.substring(0, k)) - parseInt(value.substring(k + 1, flag)) }
+                newVal = value.replace(value.substring(0, flag), newStr);
+                break;
+            }
+            if (k == value.length - 1) {
+                return value;
+            }
+        }
+    }
+}
+return calc(newVal);
 
-// for (let i = 0; i < 20; i++) {
-//     let btn = document.createElement("button");
-//     panel.appendChild(btn);
-//     btn.setAttribute("class", "btn");
-//     btn.setAttribute("id", btnNameList[i]);
-//     let id = btn.getAttribute("id");
-//     btn.setAttribute("value", id);
-//     btn.innerHTML = id;
-//     let addFun = "oper('" + id + "')";
-//     btn.setAttribute("onclick", addFun);
-//     adjustBtn(btn);
-// }
+for (let i = 0; i < 20; i++) {
+    let btn = document.createElement("button");
+    panel.appendChild(btn);
+    btn.setAttribute("class", "btn");
+    btn.setAttribute("id", btnNameList[i]);
+    let id = btn.getAttribute("id");
+    btn.setAttribute("value", id);
+    btn.innerHTML = id;
+    let addFun = "oper('" + id + "')";
+    btn.setAttribute("onclick", addFun);
+    adjustBtn(btn);
+}
+*/
 
+//3.
 function adjustBtn(btn) {
     btn.style.height = btn.offsetWidth + "px";
 }
