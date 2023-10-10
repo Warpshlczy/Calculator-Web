@@ -1,7 +1,8 @@
+//js主线程
 var panel = document.getElementsByClassName("operation-zone")[0];
 var btnNameList = ["C", "B", "/", "*", "7", "8", "9", "-", "4", "5", "6", "+", "1", "2", "3", "=", ".", "0", "^", "sin", "cos"];
 initButton(20);
-
+// 以下是各绑定函数
 function calc(value) {
     let operators = [];
     let nums = value.split(/[\+\-\*\/\^]/);
@@ -137,6 +138,7 @@ function calc(value) {
 //     btn.setAttribute("onclick", addFun);
 //     adjustBtn(btn);
 // }
+
 function adjustBtn(btn) {
     btn.style.height = btn.offsetWidth + "px";
 }
