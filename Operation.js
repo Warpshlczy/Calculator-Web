@@ -3,8 +3,12 @@ var panel = document.getElementsByClassName("operation-zone")[0];
 var btnNameList = ["C", "B", "/", "*", "7", "8", "9", "-", "4", "5", "6", "+", "1", "2", "3", "=", ".", "0", "^", "sin", "cos"];
 initButton(20);
 // 以下是各绑定函数
+
+//1.cal()函数负责对输入内容进行基本计算，包括计算顺序、取值，涵盖加减乘除和幂运算等
 function calc(value) {
+    //定义运算符数组
     let operators = [];
+    //使用正则表达式匹配基本运算符号，即加减乘除幂
     let nums = value.split(/[\+\-\*\/\^]/);
     for (let i = 0; i < value.length; i++) {
         if ((value[i] == '+' || value[i] == '-' || value[i] == '*' || value[i] == '/' || value[i] == '^')) {
@@ -13,8 +17,10 @@ function calc(value) {
             }
             else if (i == 0 && (value[i] == '+' || value[i] == '-')) {
                 nums[0] = '0';
+                //对出现在第一位的运算符号判断合理性
                 operators.push(value[i]);
             }
+            //若不满足匹配条件，则返回error
             else {
                 return "error";
             }
@@ -156,6 +162,8 @@ function initButton(btnNum) {
         adjustBtn(btn);
     }
 }
+
+//oper()
 function oper(value) {
     let inputZone = document.getElementById("input");
     let input = inputZone.value;
