@@ -6,18 +6,22 @@
 body {
     display: flex;
     justify-content: center;
+    background-color: lightyellow;
 }
 
 .outer {
     margin-top: 5vh;
     height: 80vh;
     width: 45vw;
-    background-color: lightyellow;
+    background-image: url(./assets/img/pikachu.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
     border: 6px solid yellow;
     border-radius: 20px;
     padding: 1.2rem;
     display: flex;
     justify-content: center;
+    opacity: 60%;
 }
 
 .base {
@@ -40,6 +44,7 @@ body {
     background-color: bisque;
     color: orange;
     font-weight: bolder;
+    padding: 0% 1%
 }
 
 .operation-zone {
