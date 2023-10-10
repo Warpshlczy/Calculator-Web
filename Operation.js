@@ -1,3 +1,9 @@
+/*
+ * @Descripttion: 计算器核心逻辑
+ * @Author: Chen Zhengyi
+ * @Date: 2023-10-10 19:36:13
+*/
+
 //js主线程
 var panel = document.getElementsByClassName("operation-zone")[0];
 var btnNameList = ["C", "B", "/", "*", "7", "8", "9", "-", "4", "5", "6", "+", "1", "2", "3", "=", ".", "0", "^", "sin", "cos"];
