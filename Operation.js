@@ -148,15 +148,18 @@ for (let i = 0; i < 20; i++) {
 }
 */
 
-//3.
+//3.adjustBtn() 调整按钮的数量布局和大小
 function adjustBtn(btn) {
     btn.style.height = btn.offsetWidth + "px";
 }
+
+//4.initButton() 初始化按钮
 function initButton(btnNum) {
     for (let i = 0; i < btnNum; i++) {
         let btn = document.createElement("button");
         panel.appendChild(btn);
         btn.setAttribute("class", "btn");
+        //设置DOM元素属性并转化为实际html元素渲染
         btn.setAttribute("id", btnNameList[i]);
         let id = btn.getAttribute("id");
         btn.setAttribute("value", id);
@@ -167,7 +170,7 @@ function initButton(btnNum) {
     }
 }
 
-//oper()
+//5.oper() 按钮绑定事件
 function oper(value) {
     let inputZone = document.getElementById("input");
     let input = inputZone.value;
@@ -190,6 +193,7 @@ function oper(value) {
     }
 }
 
+//6.numSwitch() 对分离的操作数内部进行特殊计算
 function numSwitch(num) {
     let result = 1;
     let regMatchSpecial = /sin|cos/;
