@@ -7,6 +7,26 @@ body {
     display: flex;
     justify-content: center;
     background-color: lightyellow;
+    background: linear-gradient(-45deg, #ee7752, lightyellow, white, gold);
+
+    background-size: 600% 600%;
+
+    animation: gradientBG 5s ease infinite;
+}
+
+/* 动画，控制背景 background-position */
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .outer {

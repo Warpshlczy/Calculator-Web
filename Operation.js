@@ -2,6 +2,7 @@
  * @Descripttion: 计算器核心逻辑
  * @Author: Chen Zhengyi
  * @Date: 2023-10-10 19:36:13
+ * @Latest Update: 2023-10-22 20:13
 */
 
 //js主线程
@@ -195,10 +196,9 @@ function oper(value) {
     if (value == '=') {
         const xhr = new XMLHttpRequest();
 
-        //2.配饰请求方法，设置请求接口地址
+        //2.配饰请求方法，设置POST请求接口地址
         xhr.open('post', baseURL + "/api/addStorage");
         xhr.setRequestHeader('Content-Type', 'text/plain')
-        alert(input);
         //3.发送请求
         xhr.send(input);
 
@@ -222,11 +222,10 @@ function oper(value) {
     }
     else if (value == 'ans') {
         // document.getElementById("input").setAttribute("value", "");
-        //TODO:
         //1.创建请求对象
         const xhr = new XMLHttpRequest();
 
-        //2.配饰请求方法，设置请求接口地址
+        //2.配饰请求方法，设置GET请求接口地址
 
         xhr.open('get', baseURL + "/api/storage");
 
@@ -238,7 +237,6 @@ function oper(value) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var res = xhr.responseText;
-                alert(res);
                 inputZone.value = res;
             }
         }
