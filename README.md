@@ -4,7 +4,7 @@
 
 A calculator running on web-browser.
 
-This project has been deployed to [Github Pages](https://warpshlczy.github.io/Calculator-Web/) .
+This project has been deployed to [Github Pages](https://warpshlczy.github.io/Calculator-Web/Calculator.html) .
 
 ## Structure
 
