@@ -6,8 +6,9 @@
 
 //js主线程
 var panel = document.getElementsByClassName("operation-zone")[0];
-var btnNameList = ["C", "B", "/", "*", "7", "8", "9", "-", "4", "5", "6", "+", "1", "2", "3", "=", ".", "0", "^", "sin", "cos"];
-initButton(20);
+var btnNameList = ["C", "B", "/", "*", "ans", "7", "8", "9", "-", "%", "4", "5", "6", "+", "√", "1", "2", "3", "log", "=", ".", "0", "^", "sin", "cos"];
+initButton(25);
+var baseURL = "http://127.0.0.1:8081"
 // 以下是各绑定函数
 
 //1.cal()函数负责对输入内容进行基本计算，包括计算顺序、取值，涵盖加减乘除和幂运算等
@@ -15,10 +16,10 @@ function calc(value) {
     //定义运算符数组
     let operators = [];
     //使用正则表达式匹配基本运算符号，即加减乘除幂，并将计算数存入数组
-    let nums = value.split(/[\+\-\*\/\^]/);
+    let nums = value.split(/[\+\-\*\/\^%]/);
     for (let i = 0; i < value.length; i++) {
-        if ((value[i] == '+' || value[i] == '-' || value[i] == '*' || value[i] == '/' || value[i] == '^')) {
-            if ((i != 0 && i != value.length - 1) && (value[i + 1] != '+' && value[i + 1] != '-' && value[i + 1] != '*' && value[i + 1] != '/') && value[i + 1] != '^') {
+        if ((value[i] == '+' || value[i] == '-' || value[i] == '*' || value[i] == '/' || value[i] == '^' || value[i] == '%')) {
+            if ((i != 0 && i != value.length - 1) && (value[i + 1] != '+' && value[i + 1] != '-' && value[i + 1] != '*' && value[i + 1] != '/') && value[i + 1] != '^' && value[i + 1] != '%') {
                 operators.push(value[i]);
             }
             else if (i == 0 && (value[i] == '+' || value[i] == '-')) {
@@ -32,7 +33,7 @@ function calc(value) {
             }
         }
     }
-    //根据数组和运算符号进行运算，先乘除幂，后加减
+    //根据数组和运算符号进行运算，先乘除幂余，后加减
     for (let i = 0; i < operators.length; i++) {
         if (numSwitch(nums[i]) != "error" && numSwitch(nums[i + 1]) != "error") {
             if (operators[i] == '*') {
@@ -44,7 +45,7 @@ function calc(value) {
             }
             else if (operators[i] == '/') {
                 if (numSwitch(nums[i + 1]) != 0) {
-                    let division = numSwitch(nums[i]) / (numSwitch(nums[i + 1]))
+                    let division = numSwitch(nums[i]) / (numSwitch(nums[i + 1]));
                     nums[i] = "" + division;
                     nums.splice(i + 1, 1);
                     operators.splice(i, 1);
@@ -58,6 +59,16 @@ function calc(value) {
                 nums.splice(i + 1, 1);
                 operators.splice(i, 1);
                 i = -1;
+            }
+            else if (operators[i] == '%') {
+                if (numSwitch(nums[i + 1]) != 0) {
+                    let remain = numSwitch(nums[i]) % (numSwitch(nums[i + 1]));
+                    nums[i] = "" + remain;
+                    nums.splice(i + 1, 1);
+                    operators.splice(i, 1);
+                    i = -1;
+                }
+                else { return "error" }
             }
         }
         else { return "error" }
@@ -182,6 +193,22 @@ function oper(value) {
     let input = inputZone.value;
 
     if (value == '=') {
+        const xhr = new XMLHttpRequest();
+
+        //2.配饰请求方法，设置请求接口地址
+        xhr.open('post', baseURL + "/api/addStorage");
+        xhr.setRequestHeader('Content-Type', 'text/plain')
+        alert(input);
+        //3.发送请求
+        xhr.send(input);
+
+        //4.网络请求返回的数据
+        // xhr.readystate===4代表响应完成了，xhr.status === 200 代表请求成功
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert("ok");
+            }
+        }
         inputZone.value = calc(input);
     }
     else if (value == 'B') {
@@ -193,6 +220,29 @@ function oper(value) {
         // document.getElementById("input").setAttribute("value", "");
         inputZone.value = "";
     }
+    else if (value == 'ans') {
+        // document.getElementById("input").setAttribute("value", "");
+        //TODO:
+        //1.创建请求对象
+        const xhr = new XMLHttpRequest();
+
+        //2.配饰请求方法，设置请求接口地址
+
+        xhr.open('get', baseURL + "/api/storage");
+
+        //3.发送请求
+        xhr.send();
+
+        //4.网络请求返回的数据
+        // xhr.readystate===4代表响应完成了，xhr.status === 200 代表请求成功
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var res = xhr.responseText;
+                alert(res);
+                inputZone.value = res;
+            }
+        }
+    }
     else {
         let newVal = input + value;
         inputZone.value = newVal;
@@ -202,7 +252,7 @@ function oper(value) {
 //6.numSwitch() 对分离的操作数内部进行特殊计算
 function numSwitch(num) {
     let result = 1;
-    let regMatchSpecial = /sin|cos/;
+    let regMatchSpecial = /sin|cos|√|log/;
     let nums = num.split(regMatchSpecial);
     let operators = num.match(regMatchSpecial);
     if (nums[0] != '') { result *= parseFloat(nums[0]) }
@@ -215,6 +265,14 @@ function numSwitch(num) {
             case "cos":
                 result *= Math.cos(parseFloat(nums[i]) * Math.PI / 180)
                 break;
+            case "√": {
+                result *= Math.sqrt(parseFloat(nums[i]))
+                break;
+            }
+            case "log": {
+                result *= Math.log(parseFloat(nums[i]))
+                break;
+            }
             default:
                 return "error"
         }
